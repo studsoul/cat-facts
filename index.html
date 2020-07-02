@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=">
   <title>Cat Facts</title>
 </head>
 <body>
   <h1> Cat Facts</h1>
-  <p>Today's Cat Fact: <span id="fact"></span></p>
+  <p>Today's Cat Fact: <span id="fact" onload="end()"></span> <span id="load">Loading a new Fact...</span></p>
   
-  <script>
-  const api_url = 'https://catfact.ninja/fact'
-  
-  async function getFACT()
-  {
-  const response = await fetch(api_url);
-  const data = await response.json();
-  const{fact, length) = data;
-  document.getElementById('fact').textContent = fact;
-  }
-  getFACT();
+   <script>
+        $(document).ready(function (){
+            setInterval(fetchdata,7000);
+        })
+            function fetchdata(){
+            $.ajax({
+                url : "https://catfact.ninja/fact",
+                type : "GET",
+                success: function (result){
+                    $("#fact").text(result.fact);
+ 
+                }
+            })
+        }
+    $(document).ready(function(){$("#load").hide();})
+    
+  </script>
   
   </script>
 </body>
